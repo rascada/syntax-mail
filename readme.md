@@ -1,6 +1,8 @@
 # syntax-mail
 simple mail sending with syntax-mail api
 
+also available for php - [mail-api-sdk](https://github.com/syntaxerro/mail-api-sdk)
+
 ## installation
 ```sh
 npm i syntax-mail # --save
