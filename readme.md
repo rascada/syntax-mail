@@ -24,8 +24,14 @@ const mail = {
 
 api
   .send(mail)
-  .then(res => console.log(res));
+  .then(res => console.log(res))
+  .catch(reason => console.log(reason));
 
 // {"status":200,"message":"Sent."}
 // or [{"status":200,"message":"Sent."}, {"status":200,"message":"Sent."}]
+
+// also we can pass node style cb as second argument
+api.send(mail, function(err, res) {
+  console.log(err ? err : res);
+});
 ```
