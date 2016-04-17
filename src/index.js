@@ -10,22 +10,39 @@ class SyntaxMail {
     this.password = base64(password);
   }
 
-  send(options, cb) {
+  _send(form, cb) {
     return new Promise((fulfill, rej) => {
-
-      const form = Object.assign({
-        username: this.username,
-        password: this.password,
-      }, options);
-
       req(api, { form }, (err, res, body) => {
         if (cb) cb(err, body);
         if (err) rej(err);
 
         fulfill(body);
       });
-
     });
+  }
+
+  createForm(mail) {
+    return Object.assign({
+      username: this.username,
+      password: this.password,
+    }, mail);
+  }
+
+  send(mail, cb) {
+    const form = this.createForm(mail);
+
+    if (mail.to instanceof Array) {
+      const emails = [];
+
+      mail.to.forEach(drawee => {
+        form.to = drawee;
+        emails.push(this._send(form));
+      });
+
+      return Promise.all(emails);
+    }
+
+    return this._send(form, cb);
   }
 }
 
