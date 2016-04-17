@@ -12,7 +12,11 @@ class SyntaxMail {
 
   _send(form, cb) {
     return new Promise((fulfill, rej) => {
-      req(api, { form }, (err, res, body) => {
+      req({
+        form,
+        url: api,
+        headers: { 'User-Agent': 'syntax-mail-js:smtp' },
+      }, (err, res, body) => {
         if (cb) cb(err, body);
         if (err) rej(err);
 
