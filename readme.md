@@ -10,7 +10,7 @@ npm i syntax-mail # --save
 ## example
 ```js
 const SyntaxMail = require('syntax-mail');
-const api = new SyntaxMail('smtp@sntx.ml', 'smtp-api-sdk');
+const api = new SyntaxMail('smtp@sntx.ml', 'smtp-api-sdk'); // this credentials works
 
 api.send({
   to: 'test@syntax-shell.me',
