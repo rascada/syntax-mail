@@ -1,6 +1,6 @@
 {
   "name": "syntax-mail",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "simple mail sending with syntax-mail api",
   "main": "src/index.js",
   "author": "Damian Martyniak <rascada>",
