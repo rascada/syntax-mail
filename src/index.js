@@ -17,10 +17,21 @@ class SyntaxMail {
         url: api,
         headers: { 'User-Agent': 'syntax-mail-js:smtp' },
       }, (err, res, body) => {
-        if (cb) cb(err, body);
-        if (err) rej(err);
+        const json = JSON.parse(body);
+        const answer = (reason, msg) => {
+          if (reason) {
+            if (cb) cb(msg);
+            rej(msg);
 
-        fulfill(body);
+            return;
+          }
+        };
+
+        answer(err, err);
+        answer(json.status !== 200, json.message);
+
+        if (cb) cb(null, json);
+        fulfill(json);
       });
     });
   }
@@ -40,7 +51,7 @@ class SyntaxMail {
 
       mail.to.forEach(drawee => {
         form.to = drawee;
-        emails.push(this._send(form));
+        emails.push(this._send(form, cb));
       });
 
       return Promise.all(emails);
