@@ -5,6 +5,17 @@ simple mail sending with syntax-mail api
 ```sh
 npm i syntax-mail # --save
 ```
+## example
+```js
+const SyntaxMail = require('syntax-mail');
+const api = new SyntaxMail('smtp@sntx.ml', 'smtp-api-sdk');
+
+api.send({
+  to: 'test@syntax-shell.me',
+  body: 'syntax hello',
+}).then(res => console.log(res));
+// res => {"status":200,"message":"Sent."}
+```
 ## usage
 ```js
 const SyntaxMail = require('syntax-mail');
@@ -27,8 +38,9 @@ api
   .then(res => console.log(res))
   .catch(reason => console.log(reason));
 
-// {"status":200,"message":"Sent."}
-// or [{"status":200,"message":"Sent."}, {"status":200,"message":"Sent."}]
+// res => {"status":200,"message":"Sent."}
+// or
+// res => [{"status":200,"message":"Sent."}, {"status":200,"message":"Sent."}]
 
 // also we can pass node style cb as second argument
 api.send(mail, function(err, res) {
